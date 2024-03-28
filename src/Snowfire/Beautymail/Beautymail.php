@@ -83,6 +83,22 @@ class Beautymail implements Mailer
     }
 
     /**
+     * Send a new message synchronously using a view.
+     *
+     * @param array|Mailable|string $mailable
+     * @param array                 $data
+     * @param Closure|null|string   $callback
+     *
+     * @return SentMessage|null
+     */
+    public function sendNow($view, array $data = [], $callback = null)
+    {
+        $data = array_merge($this->settings, $data);
+
+        return $this->mailer->sendNow($view, $data, $callback);
+    }
+
+    /**
      * Send a new message using the a view via queue.
      *
      * @param string|array    $view
